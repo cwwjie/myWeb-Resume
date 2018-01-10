@@ -5,6 +5,7 @@ const info = require('./info/Router.js');
 module.exports = (app) => {
 	
 	Router.get('/', index);
+	Router.get('/index.html', index);
 	
 	Router.use('/info', info.routes());
 
