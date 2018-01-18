@@ -9,6 +9,7 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpackConfig');
 
 const request = require('./request');
+const config = require('./config');
 
 // const less = require('less');
 const gulp = require('gulp');
@@ -53,8 +54,9 @@ module.exports = {
             webpack(ConfigurationObject, (err, stats) => {
 
                 if (err || stats.hasErrors()) {
+                    console.log(stats)
                     let error = err || stats.hasErrors()
-                    reject(`Webpack 打包 出错, 原因: ${error}`);
+                    reject(`Webpack 打包 出错, 原因: ${stats}`);
                     return
                 }
                 resolve();
@@ -65,6 +67,7 @@ module.exports = {
     HTML: function (ReadeHTMLfilePath, WriteHTMLfilePath, data) {
         const _this = this;
         data = data || {};
+        data.file_version = config.file_version;
 
         return new Promise((resolve, reject) => {
 
@@ -84,7 +87,7 @@ module.exports = {
         });
     },
 
-    gulpLess: function(ReadeCSSfilePath, WriteCSSfilePath, gulpLessfilePath) {
+    CSS: function (ReadeCSSfilePath, WriteCSSfilePath, gulpLessfilePath) {
         const _this = this;
 
         return new Promise((resolve, reject) => {
@@ -97,34 +100,7 @@ module.exports = {
             .on('error', error => reject(`转换 less 文件出错, 原因: ${error}`))
             .on('end', () => resolve());
         });
-
     },
-
-    // CSS: function (ReadeCSSfilePath, WriteCSSfilePath) {
-    //     const _this = this;
-
-    //     return new Promise((resolve, reject) => {
-
-    //         _this.readFilePromise(ReadeCSSfilePath).then((content) => {
-
-    //             less.render(content, (error, output) => {
-    //                 if (error) {
-    //                     reject(`转换 less 文件出错, 原因: ${error}`);
-    //                     return 
-    //                 }
-
-    //                 _this.WriteFillePromise(WriteCSSfilePath, output.css)
-    //                 .then(() => {
-    //                     resolve();
-    //                 }, (error) => {
-    //                     reject(`转换 less 文件成功, 但 CSS 写入出错. 原因: ${error}`);
-    //                 });
-    //             });
-    //         }, (error) => {
-    //             reject(`读取 less 文件出错, 原因: ${error}`);
-    //         });
-    //     });
-    // },
 
     readFilePromise: (ReadefilePath) => new Promise((resolve, reject) => {
 
@@ -138,8 +114,9 @@ module.exports = {
     }),
 
     WriteFillePromise: (writeFilePath, data) => new Promise((resolve, reject) => {
-
-        fs.writeFile(writeFilePath, data, 'utf8', (error) => {
+        let options = { 'encoding': 'utf8' }
+        
+        fs.writeFile(writeFilePath, data, options, (error) => {
             if (error) {
                 reject(error);
                 return

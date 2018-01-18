@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Re杰杰-个人简历</title>
-  <link rel="stylesheet" type="text/css" href='./index.css'>
+  <link rel="stylesheet" type="text/css" href="./index.css">
 </head>
 <body>
   <header>
-    <a href='./../index.html'>
+    <a href="./../index.html">
       <div><i></i>Re杰杰</div>
     </a>
   </header>
@@ -17,6 +17,8 @@
   <div class="main-wrapper">
   
   </div>
-
+  
+  <script>if(!window.Promise) {document.writeln('<script src="./dist/js/es6-promise.min.js"'+'>'+'<'+'/'+'script>');}</script>
+  <script type="text/javascript" src="./index.js"></script>
 </body>
 </html>

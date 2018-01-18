@@ -1,18 +1,23 @@
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 module.exports = (ReadefilePath, writeFilePath, writeFileName, isproduction) => {
+  process.noDeprecation = true;
   if (isproduction) {
     return {
-      entry: ReadefilePath,
-      output: {
+      'entry': [
+        path.join(__dirname, './url-production.js'),
+        ReadefilePath
+      ],
+      'output': {
         path: writeFilePath,
         filename: writeFileName
       },
-      module: {
+      'module': {
         loaders: [
           {
-            test: path.join(__dirname, 'es6'),
+            test: /\.js$/,
             loader: 'babel-loader',
             query: {
               presets: [
@@ -23,25 +28,24 @@ module.exports = (ReadefilePath, writeFilePath, writeFileName, isproduction) => 
           }
         ]
       },
-      plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            warnings: false
-          }
-        })
+      'plugins': [
+        new UglifyJsPlugin()
       ]
     }
   } else {
     return {
-      entry: ReadefilePath,
-      output: {
+      'entry': [
+        path.join(__dirname, './url-development.js'),
+        ReadefilePath
+      ],
+      'output': {
         path: writeFilePath,
         filename: writeFileName
       },
-      module: {
+      'module': {
         loaders: [
           {
-            test: path.join(__dirname, 'es6'),
+            test: /\.js$/,
             loader: 'babel-loader',
             query: {
               presets: [
