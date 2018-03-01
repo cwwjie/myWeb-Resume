@@ -1,6 +1,5 @@
 window.onload = function (){
   main.init();
-  main.test();
 }
 
 var main = {
@@ -8,43 +7,6 @@ var main = {
 
   init: function () {
     this.VueData = new Vue(count.init());
-  },
-
-  test: function () {
-    var target = 5;
-
-    var countArray = [];
-
-    var targetArray = [];
-    var targetReverseArray = [];
-    for (var i = 0; i < target; i++) {
-      targetArray.push(i + 1);
-      targetReverseArray.push(target - i);
-    }
-
-    targetArray.map(function (value, index) {
-      var valueArray = [];
-      for (var i = 0; i < value; i++) {
-        valueArray.push(i + 1);
-      }
-      
-      valueArray.reverse().map(function (val, key) {
-        countArray.push(val);
-      })
-    });
-
-    targetReverseArray.map(function (value, index) {
-      var valueArray = [];
-      for (var i = 0; i < value; i++) {
-        valueArray.push(i);
-      }
-      
-      valueArray.map(function (val, key) {
-        countArray.push(val);
-      })
-    });
-
-    return countArray;
   }
 }
 
@@ -56,6 +18,7 @@ var count = {
       'countSelect': null,
       'btnList': []
     },
+
     'watch': {
       countSelect: function (newSelect, oldSelect) {
         this.btnList = this.selectToList(parseInt(newSelect));
@@ -95,7 +58,7 @@ var count = {
             countArray.push(val);
           })
         });
-    
+
         targetReverseArray.map(function (value, index) {
           var valueArray = [];
           for (var i = 0; i < value; i++) {
@@ -103,7 +66,7 @@ var count = {
           }
           
           valueArray.map(function (val, key) {
-            countArray.push(val);
+            countArray.push(target - val);
           })
         });
     
@@ -128,14 +91,6 @@ var count = {
     }
     
   },
-
-  'btn': [
-    {'id': 0, 'name': '2', 'isSelect': false},
-    {'id': 1, 'name': '3', 'isSelect': false},
-    {'id': 2, 'name': '4', 'isSelect': false},
-    {'id': 3, 'name': '5', 'isSelect': false},
-    {'id': 4, 'name': '6', 'isSelect': false}
-  ],
 
   init: function () {
     var RejiejayCount = JSON.parse(localStorage.getItem('RejiejayCount'));
