@@ -40,12 +40,10 @@ var count = {
         target = parseInt(target);
     
         var countArray = [];
-    
         var targetArray = [];
-        var targetReverseArray = [];
+
         for (var i = 0; i < target; i++) {
           targetArray.push(i + 1);
-          targetReverseArray.push(target - i);
         }
     
         targetArray.map(function (value, index) {
@@ -59,15 +57,8 @@ var count = {
           })
         });
 
-        targetReverseArray.map(function (value, index) {
-          var valueArray = [];
-          for (var i = 0; i < value; i++) {
-            valueArray.push(i);
-          }
-          
-          valueArray.map(function (val, key) {
-            countArray.push(target - val);
-          })
+        countArray.concat([]).map(function (value, index) {
+          countArray.push(target - value + 1);
         });
     
         return countArray.map(function (val, key) {
