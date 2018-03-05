@@ -1,0 +1,146 @@
+思路：
+	每点击一下id="add-btn" 的按钮
+		获取input里面的数据，将数据储存进入aqiData对象里面。
+		页面渲染
+		<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>
+		<tr><td>aqiData对象里面1城市</td><td>aqiData对象里面1空气</td><td><button onClick="delBtnHandle()">删除</button></td></tr>
+		…………
+
+	点击一下 button 删除
+		删除掉"相应"aqiData对象里面的数据
+		并且重新渲染一次页面
+
+
+
+
+
+
+
+
+
+
+
+
+知识点一：保存在对象里，获取对象数据并且反馈到HTML上。
+
+	这个↓是对象
+		aqiData = {
+		   "北京": 90,
+		   "上海": 40
+		};
+
+	意思是，aqiData对象下面有2个属性，一个名为"北京"的属性，是数据属性，[[Value]]特性是90。一个名为"上海"的属性，是数据属性，[[Value]]特性是40。
+	  									  ↓找了好久啊、
+	for-in 语句用于遍历数组或者对象的 “属性”（对数组或者对象的属性进行循环操作）。
+
+	例如：
+
+			var x      //在这里声明就是全局的意思
+			var mycars = new Object()
+			mycars[object0] = "Saab"
+			mycars[object1] = "Volvo"
+			mycars[object2] = "BMW"
+
+			   //↓也可以在这里进行声明
+			for (x in mycars) {
+			document.write(mycars[x] + "<br />")
+			}
+
+	删除属性是用到
+	delete aqiData[city];
+
+console.log()是在浏览器控制台里面调用的。目的是检查JavaScript代码的，这样就不用alert那么麻烦了。
+
+ .trim() 是去除掉空格
+
+innerHTML属性已经包含到HTML5规范中，就是重新设置标签，
+node..innerHTML = ""; 语法是这样的
+
+                       ↓这个表示当解析到这个对象的时候调用 function init(){}这个函数。
+function init() {}    init();
+例子:
+alert (); 就是当解析到alert(); 调用JavaScript库里面的function alert(temp){}的内建函数。
+                                                                   ↑return就是返回给这整个，不是temp，而是alert(temp)
+alert(); 宿主对象也就是说浏览器提供的对象。
+例如Image();Element();
+
+                            ↓existingnode在其之前插入新节点的子节点。如果未规定，会在结尾插入newnode。
+node.insertBefore(newnode,existingnode)
+                     ↑newnode需要插入的节点对象。 
+然而并没有inserAfter();这个方法
+
+
+childNodes 属性返回节点的子节点集合。也可以childNodes[0];
+您可以使用“length”属性来确定子节点的数量，然后您就能够遍历所有的子节点并提取您需要的信息。
+
+var c=document.body.childNodes;
+for (i=0; i<c.length; i++)
+  {
+  txt=txt + c[i].nodeName + "<br>";
+  };
+
+
+三目运算
+	冒号在这里用来分割不同条件的返回值。
+	JavaScript
+	var result = (condition exp) ? (value1) : (value2) ;
+	语法：
+    conditions ? statementA : statementB ;
+    其中conditions是任何 Boolean 表达式。
+	statementA是当 conditions 是 true 时执行的语句。可以是复合语句。
+	statementB是当 conditions 是 false 时执行的语句。可以是复合语句。
+
+target 事件属性可返回事件的目标节点（触发该事件的节点），如生成事件的元素、文档或窗口。
+  ↑返回的是节点。
+
+nodeName 属性指定节点的节点名称。
+
+dataset 是获取自定义属性的意思；例如↓
+
+	<div id="day-meal-expense" data-drink="tea" data-food="noodle" data-meal="lunch">$18.3</div>
+		var expenseday=document.getElementById('day-meal-expense');
+		var typeOfDrink=expenseday.dataset.drink;
+		console.log(typeOfDrink);//tea
+		console.log(expenseday.dataset.food);//noodle
+		console.log(expenseday.dataset.meal);//lunch
+
+
+
+
+事件委托(event delegation)  JavaScript高级程序设计 p402
+
+使用事件委托技术能让你避免对特定的每个节点添加事件监听器；相反，事件监听器是被添加到它们的父元素上。事件监听器会分析从子元素冒泡上来的事件，找到是哪个子元素的事件
+
+		<ul id="parent-list">
+			<li id="post-1">Item 1</li>
+			<li id="post-2">Item 2</li>
+			<li id="post-3">Item 3</li>
+			<li id="post-4">Item 4</li>
+			<li id="post-5">Item 5</li>
+			<li id="post-6">Item 6</li>
+		</ul>
+
+当每个子元素被点击时，将会有各自不同的事件发生。你可以给每个独立的li元素添加事件监听器，但有时这些li元素可能会被删除，可能会有新增，监听它们的新增或删除事件将会是一场噩梦，尤其是当你的监听事件的代码放在应用的另一个地方时。
+
+
+		// 找到父元素，添加监听器...
+		document.getElementById("parent-list").addEventListener("click",function(e) {
+			// e.target是被点击的元素!
+			// 如果被点击的是li元素
+			if(e.target && e.target.nodeName == "LI") {
+				// 找到目标，输出ID!
+				console.log("List item ",e.target.id.replace("post-")," was clicked!");
+				//我们也可以调用一段函数！
+			}
+		});
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+#carousel-example-generic {
+	margin:auto;
+	max-width: 997px;
+	margin-bottom:20px;
+}
+.manycontent{
+	margin:auto;
+	max-width: 1200px;
+}
+.tab-content {
+	border-left:1px solid #dddddd;
+	border-right:1px solid #dddddd;
+	border-bottom:1px solid #dddddd;
+}
+.tab-pane {
+	background: #fafafa;
+}
+.col-md-4 > div{
+	border:1px solid #dddddd;
+	padding:10px;
+	margin:20px;
+}
+.col-content {
+	text-align: center;
+}
+.col-content > button {
+	text-align: center;
+	padding:0;
+	margin:0 auto;
+} 
+
+.col-md-4 article h4 {
+	text-align: center;  
+	font-family:"微软雅黑";
+}

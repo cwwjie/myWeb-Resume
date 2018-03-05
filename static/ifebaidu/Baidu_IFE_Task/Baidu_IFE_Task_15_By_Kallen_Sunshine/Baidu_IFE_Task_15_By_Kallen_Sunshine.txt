@@ -1,0 +1,26 @@
+
+下面这个例子会返回所有 <p> 元素的一个节点列表，且这些 <p> 元素必须是 id 为 "maindiv" 的元素的后代：
+
+			document.getElementById('maindiv').getElementsByTagName("p"); 
+
+
+
+			var outputul = document.getElementById("resort");
+			var newLI = document.createElement("li");←——————————————————————————————————————放置里面
+			for (i=0;i<data.length;i++){
+				var textNode=new Array();
+				textNode[i]=document.createTextNode(data[i][0]+"空气质量"+data[i][1]);
+				var newLI = document.createElement("li");←——————————————————————————————————还有放置外面是有区别的
+				newLI.appendChild(textNode[i]);
+				outputul.appendChild(newLI);
+			}
+
+ querySelector(); querySelectorAll();方法比document.getelementId高级选择器。
+
+btn.onclick=btnHandle()————这样绑定事件是错误的
+element.addEventListener(event, function, useCapture) 
+
+											↑    true - 事件句柄在捕获阶段执行
+											     false- false- 默认。事件句柄在冒泡阶段执行
+
+
